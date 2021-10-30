@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
-import './style.css'
 import ToDoItem from "./ToDoItem";
+import './style.css'
 
 class ToDoList extends Component {
   constructor(props) {
@@ -8,7 +8,10 @@ class ToDoList extends Component {
     this.state = {
       inputValue: '',
       list: []
-    }
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleDeleteItem = this.handleDeleteItem.bind(this);
   };
 
   render() {
@@ -22,50 +25,45 @@ class ToDoList extends Component {
                value={this.state.inputValue}
                onChange={this.handleInputChange.bind(this)}
         />
-        <button type="submit" onClick={this.handleButtonClick.bind(this)}>提交</button>
+        <button type="submit" onClick={this.handleButtonClick}>提交</button>
         <ul>
-          {
-            this.state.list.map((item, index) => {
-              //此处需要指定key，处理不够优雅
-              return (
-                // <li
-                //   key={index}
-                //   onClick={this.handleDeleteItem.bind(this, index)}
-                //   dangerouslySetInnerHTML={{__html: item}}
-                // />
-                <ToDoItem content={item} index={index} key={index} deleteItem={this.handleDeleteItem.bind(this)}/>
-              )
-            })
-          }
+          {this.getTodoItem()}
         </ul>
       </Fragment>
     );
   };
 
   handleInputChange(e) {
-    console.log(e.target.value);
-    this.setState({
-      inputValue: e.target.value
-    })
+    console.log('Input ', e.target.value);
+    const value = e.target.value;
+    // 函数变对象使用拷贝方式
+    this.setState(() => ({inputValue: value}));
   };
 
-  handleButtonClick() {
-    this.setState({
-      // 扩展运算符
-      list: [...this.state.list, this.state.inputValue],
-      inputValue: ''
+  getTodoItem() {
+    return this.state.list.map((item, index) => {
+      //此处需要指定key，处理不够优雅
+      return (
+        <ToDoItem content={item} index={index} key={index} deleteItem={this.handleDeleteItem}/>
+      )
     })
+  }
+
+  handleButtonClick() {
+    // prevState 前值状态
+    this.setState((prevState) => ({
+      list: [...prevState.list, this.state.inputValue],
+      inputValue: ''
+    }));
   };
 
   handleDeleteItem(index) {
-    console.log('you clicked ' + index);
-    // 拷贝list
-    const list = [...this.state.list];
-    list.splice(index, 1);
-
-    // immutable 请不要直接修改state，可能造成性能问题
-    this.setState({
-      list: list
+    console.log('Delete Index ' + index);
+    this.setState((prevState) => {
+      // 拷贝list
+      const list = [...prevState.list];
+      list.splice(index, 1);
+      return {list}
     })
   }
 }
