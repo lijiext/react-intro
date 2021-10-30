@@ -27,3 +27,8 @@ class App extends Component {
 1. 直接引入 css 文件 `import './style.css'`
 2. 使用 className 替代 class
 3. 使用 htmlFor 替代 For
+
+## ToDo List Item 组件化
+### 父子组件数据传递
+- 父组件直接传递属性，子组件引用 `this.props.attribute`
+- 父组件传递函数给子组件，使用 `this.function.bind(this)`

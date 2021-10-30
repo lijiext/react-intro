@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import './style.css'
-
+import ToDoItem from "./ToDoItem";
 
 class ToDoList extends Component {
   constructor(props) {
@@ -27,11 +27,14 @@ class ToDoList extends Component {
           {
             this.state.list.map((item, index) => {
               //此处需要指定key，处理不够优雅
-              return (<li
-                key={index}
-                onClick={this.handleDeleteItem.bind(this, index)}
-                dangerouslySetInnerHTML={{__html: item}}
-              />)
+              return (
+                // <li
+                //   key={index}
+                //   onClick={this.handleDeleteItem.bind(this, index)}
+                //   dangerouslySetInnerHTML={{__html: item}}
+                // />
+                <ToDoItem content={item} index={index} key={index} deleteItem={this.handleDeleteItem.bind(this)}/>
+              )
             })
           }
         </ul>
