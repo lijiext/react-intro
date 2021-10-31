@@ -151,3 +151,15 @@ Props 或 State 发生变化，则重新 Render
 
 ## [React transition group](https://reactcommunity.org/react-transition-group/css-transition)
 `npm install react-transition-group --save`
+```javascript
+<CSSTransition
+    in={this.state.show}
+    timeout={1000}
+    classNames="fade"
+    unmountOnExit
+    onEntered={(el) => {el.style.color = 'red'}}
+    appear={true}
+>
+    <div>Hello</div>
+</CSSTransition>
+```
