@@ -149,6 +149,15 @@ Props 或 State 发生变化，则重新 Render
 2. 在组件中添加 `import axios from 'axios';`
 3. `axios.get('/api/list').then(() => {}).catch(() => {})`
 
+## React Redux
+Redux 是一个 React 存储框架，当组件之间需要频繁的传递数据，则需要使用数据层框架
+![redux](https://cdn.codecentric.de/20210310100334/Bildschirmfoto-2017-12-01-um-08.53.32-768x452.png)
+核心思想: 组件不要过多的处理数据，而是将数据存放在 store 中，便于跨组件的数据传递
+
+Redux = Reducer + Flux
+
+Redux 工作流程
+![img.png](docs/images/redux.gif)
 
 
 
