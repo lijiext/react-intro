@@ -159,19 +159,7 @@ Redux = Reducer + Flux
 Redux 工作流程
 ![img.png](docs/images/redux.gif)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### 如何使用 Redux
+1. 创建 store
+2. 创建 reducer, 数据库
+3. 组件中 constructor 替换 
