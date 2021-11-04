@@ -222,3 +222,23 @@ Redux 工作流程
 2. 定义 actionCreators，定义全局的 action，并在其中引用 actionTypes
 3. 在组件中引用定义的 actionCreators 方法
 
+## UI 组件(傻瓜组件)与容器组件(聪明组件)
+一个组件中包含了逻辑和UI时，内容冗余，维护不便，因此将这两部分拆开
+
+## 无状态组件
+当组件只有一个 render 函数时，可以修改为无状态组件，提高性能，其中的变量 this.props 修改为 props 即可
+```javascript
+const ToDoListUI = (props) => {
+  return (
+    <div style={{padding: '10px'}}>
+      <Input
+        placeholder='Please Input Here'
+        value={props.inputValue}
+        style={{width: '300px'}}
+        onChange={props.handleInputChange}
+      />
+      ...
+    </div>
+  )
+}
+```

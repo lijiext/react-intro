@@ -1,8 +1,11 @@
+// 容器组件，关注业务逻辑
+
 import React, {Component} from "react";
-import {Input, Button, List} from "antd";
-import 'antd/dist/antd.css';
+
 import store from "./store/index.js";
 import {getAddItemAction, getDeleteItemAction, getInputChangeAction} from "./store/actionCreators";
+import ToDoListUI from "./ToDoListUI";
+import 'antd/dist/antd.css';
 
 class ToDoList extends Component {
   constructor(props) {
@@ -11,6 +14,9 @@ class ToDoList extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleStoreChange = this.handleStoreChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleItemDelete = this.handleItemDelete.bind(this);
+    // 改变 this 指向
+    this.handleItemDelete = this.handleItemDelete.bind(this);
   };
 
   // 需要在组件加载之后，给 store 注册监听器
@@ -22,26 +28,13 @@ class ToDoList extends Component {
 
   render() {
     return (
-      <div style={{padding: '10px'}}>
-        <Input
-          placeholder='Please Input Here'
-          value={this.state.inputValue}
-          style={{width: '300px'}}
-          onChange={this.handleInputChange}
-        ></Input>
-        <Button
-          type='primary'
-          style={{marginLeft: '10px'}}
-          onClick={this.handleButtonClick}
-        >Submit</Button>
-        <List
-          style={{width: '300px', marginTop: '10px'}}
-          bordered
-          dataSource={this.state.list}
-          renderItem={(item, index) => (
-            <List.Item onClick={this.handleItemDelete.bind(this, index)}>{item}</List.Item>)}
-        />
-      </div>
+      <ToDoListUI
+        inputValue={this.state.inputValue}
+        handleInputChange={this.handleInputChange}
+        handleButtonClick={this.handleButtonClick}
+        list={this.state.list}
+        handleItemDelete={this.handleItemDelete}
+      />
     )
   }
 
