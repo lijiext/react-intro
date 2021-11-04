@@ -3,10 +3,14 @@
 import React, {Component} from "react";
 
 import store from "./store/index.js";
-import {getAddItemAction, getDeleteItemAction, getInitListAction, getInputChangeAction} from "./store/actionCreators";
+import {
+  getAddItemAction,
+  getDeleteItemAction,
+  getInputChangeAction,
+  getTodoList
+} from "./store/actionCreators";
 import ToDoListUI from "./ToDoListUI";
 import 'antd/dist/antd.css';
-import axios from "axios";
 
 class ToDoList extends Component {
   constructor(props) {
@@ -26,15 +30,20 @@ class ToDoList extends Component {
     // store 发生变化，执行此函数
     store.subscribe(this.handleStoreChange);
 
-    axios.get('https://72994133-2192-4d73-b83a-5df37a049815.mock.pstmn.io/api/list')
-    .then(res => {
-      const data = res.data;
-      const action = getInitListAction(res.data);
-      store.dispatch(action);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    // 发送异步请求，不推荐在生命周期中发送异步请求
+    // axios.get('https://72994133-2192-4d73-b83a-5df37a049815.mock.pstmn.io/api/list')
+    // .then(res => {
+    //   const data = res.data;
+    //   const action = getInitListAction(res.data);
+    //   store.dispatch(action);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // })
+
+    // 创建 action
+    const action = getTodoList();
+    store.dispatch(action);
   };
 
   render() {

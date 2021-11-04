@@ -1,4 +1,5 @@
 import {ADD_TODO_ITEM, CHANGE_INPUT_VALUE, DELETE_TODO_ITEM, INIT_LIST_ACTION} from "./actionTypes";
+import axios from "axios";
 
 export const getInputChangeAction = (value) => ({
   type: CHANGE_INPUT_VALUE,
@@ -21,3 +22,18 @@ export const getInitListAction = (data) => ({
     data
   }
 )
+
+// 由于使用了 redux-thunk 所以可以返回函数
+export const getTodoList = () => {
+  return (dispatch) => {
+    axios.get('https://72994133-2192-4d73-b83a-5df37a049815.mock.pstmn.io/api/list')
+    .then(res => {
+      const data = res.data;
+      const action = getInitListAction(data);
+      dispatch(action);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+}

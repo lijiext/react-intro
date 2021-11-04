@@ -223,10 +223,13 @@ Redux 工作流程
 3. 在组件中引用定义的 actionCreators 方法
 
 ## UI 组件(傻瓜组件)与容器组件(聪明组件)
+
 一个组件中包含了逻辑和UI时，内容冗余，维护不便，因此将这两部分拆开
 
 ## 无状态组件
+
 当组件只有一个 render 函数时，可以修改为无状态组件，提高性能，其中的变量 this.props 修改为 props 即可
+
 ```javascript
 const ToDoListUI = (props) => {
   return (
@@ -241,4 +244,29 @@ const ToDoListUI = (props) => {
     </div>
   )
 }
+```
+
+## Redux-thunk 中间件发送 ajax 请求
+### 使用方式
+1. 安装 `npm install redux-thunk --save`
+2. 配置 `/src/store/index.js`
+```javascript
+import {createStore, applyMiddleware, compose} from "redux";
+import reducer from './reducer';
+import thunk from 'redux-thunk';
+
+const composeEnhancers =
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk)
+);
+
+const store = createStore(
+  reducer,
+  enhancer
+);
+
+export default store;
 ```

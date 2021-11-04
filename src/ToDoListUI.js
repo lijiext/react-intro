@@ -1,6 +1,6 @@
 // UI 组件，负责页面渲染内容
 
-import React, {Component} from "react";
+import React from "react";
 import {Button, Input, List} from "antd";
 
 // 无状态组件，只是一个函数，性能更好，没有复杂的生命周期
@@ -24,7 +24,7 @@ const ToDoListUI = (props) => {
         dataSource={props.list}
         renderItem={(item, index) => (
           // UI 组件传值，关注 this 指向
-          <List.Item onClick={(index) => {
+          <List.Item onClick={() => {
             props.handleItemDelete(index)
           }}>{item}</List.Item>)}
       />
