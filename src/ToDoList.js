@@ -3,9 +3,10 @@
 import React, {Component} from "react";
 
 import store from "./store/index.js";
-import {getAddItemAction, getDeleteItemAction, getInputChangeAction} from "./store/actionCreators";
+import {getAddItemAction, getDeleteItemAction, getInitListAction, getInputChangeAction} from "./store/actionCreators";
 import ToDoListUI from "./ToDoListUI";
 import 'antd/dist/antd.css';
+import axios from "axios";
 
 class ToDoList extends Component {
   constructor(props) {
@@ -24,6 +25,16 @@ class ToDoList extends Component {
   componentDidMount() {
     // store 发生变化，执行此函数
     store.subscribe(this.handleStoreChange);
+
+    axios.get('https://72994133-2192-4d73-b83a-5df37a049815.mock.pstmn.io/api/list')
+    .then(res => {
+      const data = res.data;
+      const action = getInitListAction(res.data);
+      store.dispatch(action);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   };
 
   render() {
