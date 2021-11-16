@@ -289,3 +289,24 @@ export default store;
 关于 redux-thunk 和 redux-saga 的比较，saga 更加复杂而已 
 
 
+## React-Redux 
+### Provider 组件
+```js
+// in src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ToDoList from "./ToDoList";
+import {Provider} from "react-redux";
+import store from "./store/index.js";
+
+const App = (
+  <Provider store={store}>
+    <ToDoList/>
+  </Provider>
+)
+
+ReactDOM.render(
+  App, document.getElementById('root')
+);
+```
+Provider 与 store 绑定，之下的所有组件都将有能力获得 store 中的数据
