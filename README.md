@@ -247,9 +247,12 @@ const ToDoListUI = (props) => {
 ```
 
 ## Redux-thunk 中间件发送 ajax 请求
+
 ### 使用方式
+
 1. 安装 `npm install redux-thunk --save`
 2. 配置 `/src/store/index.js`
+
 ```javascript
 import {createStore, applyMiddleware, compose} from "redux";
 import reducer from './reducer';
@@ -270,3 +273,19 @@ const store = createStore(
 
 export default store;
 ```
+
+### Redux 中间件原理
+
+**什么是 redux 中间件？**
+
+在 action 和 store 间的一层，是对 dispatch 方法的再次封装
+
+常见中间件 redux-thunk, redux-logger, redux-saga
+
+### Redux-saga 中间件使用
+
+异步逻辑处理，API 更加复杂，更加工程化
+
+关于 redux-thunk 和 redux-saga 的比较，saga 更加复杂而已 
+
+

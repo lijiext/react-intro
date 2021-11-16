@@ -5,12 +5,12 @@ import React, {Component} from "react";
 import store from "./store/index.js";
 import {
   getAddItemAction,
-  getDeleteItemAction,
-  getInputChangeAction,
-  getTodoList
+  getDeleteItemAction, getInitList, getInitListAction,
+  getInputChangeAction
 } from "./store/actionCreators";
 import ToDoListUI from "./ToDoListUI";
 import 'antd/dist/antd.css';
+import axios from "axios";
 
 class ToDoList extends Component {
   constructor(props) {
@@ -42,8 +42,13 @@ class ToDoList extends Component {
     // })
 
     // 创建 action
-    const action = getTodoList();
+    // const action = getTodoList();
+    // store.dispatch(action);
+
+    // 容器组件加载完成，派发 action
+    const action = getInitList();
     store.dispatch(action);
+    console.log(action);
   };
 
   render() {
